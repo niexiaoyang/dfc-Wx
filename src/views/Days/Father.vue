@@ -54,7 +54,7 @@
             <div class="label">供货价</div>
             <div class="count">25.00</div>
           </div>
-          <div class="buy-btn flex-end" id="buy-btn">立即去购买>></div>
+          <div class="buy-btn flex-end" id="buy-btn" @click="handleBuy">立即去购买>></div>
         </div>
       </div>
     </div>
@@ -84,8 +84,7 @@
 
 <script>
 import brower from '@/utils/brower';
-
-const test = {};
+import bridge from '@/utils/bridge';
 
 export default {
   name: 'Father',
@@ -93,41 +92,21 @@ export default {
     return {
     };
   },
-  mounted() {
-    this.setUp();
-  },
   methods: {
     handleClickImg(e) {
       e.stopPropagation();
       e.preventDefault();
     },
-    setUp() {
-      this.setupWebViewJavascriptBridge((bridge) => {
-        var callbackButton = document.getElementById('buy-btn');
-        callbackButton.onclick = function(e) {
-          e.preventDefault()
-
-          if (brower.checkIfIOS()) {
-            bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
-              console.log('JS got response', response)
-            })
-          } else {
-            if (window.openGoodsD) {
-              window.openGoodsD('goods str here');
-            }
-          }
+    handleBuy() {
+      if (brower.checkIfIOS()) {
+        bridge.callHandler('testObjcCallback', { productId: 'testId' }, (response) => {
+          console.log('JS got response', response);
+        });
+      } else {
+        if (window.openGoodsD) {
+          window.openGoodsD('testId');
         }
-      });
-    },
-    setupWebViewJavascriptBridge(callback) {
-        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
-        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
-        window.WVJBCallbacks = [callback];
-        const WVJBIframe = document.createElement('iframe');
-        WVJBIframe.style.display = 'none';
-        WVJBIframe.src = 'https://__bridge_loaded__';
-        document.documentElement.appendChild(WVJBIframe);
-        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0);
+      }
     },
   },
 };
