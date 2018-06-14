@@ -1,10 +1,10 @@
 <template>
   <div class="father-day">
     <div class="box box-1">
-      <img src="@/assets/images/father/father-day-01.png" />
+      <img src="@/assets/images/father/father-day-01.png" @click="handleClickImg" />
     </div>
     <div class="box box-2">
-      <img src="@/assets/images/father/father-day-02.png" />
+      <img src="@/assets/images/father/father-day-02.png" @click="handleClickImg" />
       <div class="rule-info flex-column-center">
         <ul>
           <li>活动期间在“大风车商城APP”下载注册/成交订单的用户，均可领取现金红包，可用于减免运费。</li>
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="box box-3">
-      <img src="@/assets/images/father/father-day-03.png" />
+      <img src="@/assets/images/father/father-day-03.png" @click="handleClickImg" />
 
       <div class="first flex-sb-start">
         <div class="baby baby-1">
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="box box-4">
-      <img src="@/assets/images/father/father-day-04.png" />
+      <img src="@/assets/images/father/father-day-04.png" @click="handleClickImg" />
       <div class="baby">
         <img src="@/assets/images/father/baby-4.png" />
         <div class="info">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="box box-5">
-      <img src="@/assets/images/father/father-day-05.png" />
+      <img src="@/assets/images/father/father-day-05.png" @click="handleClickImg" />
       <div class="baby-wrapper">
         <div class="baby-1">
           <img src="@/assets/images/father/baby-5.png" />
@@ -88,6 +88,12 @@ export default {
   data() {
     return {
     };
+  },
+  methods: {
+    handleClickImg(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    },
   },
 };
 </script>
