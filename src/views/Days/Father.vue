@@ -54,7 +54,7 @@
             <div class="label">供货价</div>
             <div class="count">25.00</div>
           </div>
-          <div class="buy-btn flex-end" @click="handleBuy">立即去购买>></div>
+          <div class="buy-btn flex-end" id="buy-btn">立即去购买>></div>
         </div>
       </div>
     </div>
@@ -85,16 +85,33 @@
 <script>
 import brower from '@/utils/brower';
 
+const test = {};
+
 export default {
   name: 'Father',
   data() {
     return {
     };
   },
+  mounted() {
+    this.setUp();
+  },
   methods: {
     handleClickImg(e) {
       e.stopPropagation();
       e.preventDefault();
+    },
+    setUp() {
+      this.setupWebViewJavascriptBridge((bridge) => {
+        var callbackButton = document.getElementById('buy-btn');
+        callbackButton.onclick = function(e) {
+          e.preventDefault()
+          console.log('start');
+          bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
+            console.log('JS got response', response)
+          })
+        }
+      });
     },
     setupWebViewJavascriptBridge(callback) {
         if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
@@ -105,19 +122,6 @@ export default {
         WVJBIframe.src = 'https://__bridge_loaded__';
         document.documentElement.appendChild(WVJBIframe);
         setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0);
-    },
-    handleBuy() {
-      if (brower.checkIfIOS()) {
-        this.setupWebViewJavascriptBridge((bridge) => {
-          bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
-            console.log('js log', response);
-          })
-        });
-      } else {
-        if (window.openGoodsD) {
-          window.openGoodsD('product Id here to pass');
-        }
-      }
     },
   },
 };
