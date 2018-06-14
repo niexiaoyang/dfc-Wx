@@ -106,10 +106,16 @@ export default {
         var callbackButton = document.getElementById('buy-btn');
         callbackButton.onclick = function(e) {
           e.preventDefault()
-          console.log('start');
-          bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
-            console.log('JS got response', response)
-          })
+
+          if (brower.checkIfIOS()) {
+            bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
+              console.log('JS got response', response)
+            })
+          } else {
+            if (window.openGoodsD) {
+              window.openGoodsD('goods str here');
+            }
+          }
         }
       });
     },

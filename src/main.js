@@ -13,6 +13,7 @@ import * as filters from './filters'; // global filters
 import { install } from './components/index'; // all global components
 import Icon from './components/Icon';
 
+import './utils/bridge';
 import './permission'; // permission control
 
 Vue.config.productionTip = false;
