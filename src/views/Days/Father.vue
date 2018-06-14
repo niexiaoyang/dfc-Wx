@@ -54,7 +54,7 @@
             <div class="label">供货价</div>
             <div class="count">25.00</div>
           </div>
-          <div class="buy-btn flex-end">立即去购买>></div>
+          <div class="buy-btn flex-end" @click="handleBuy">立即去购买>></div>
         </div>
       </div>
     </div>
@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import brower from '@/utils/brower';
+
 export default {
   name: 'Father',
   data() {
@@ -93,6 +95,29 @@ export default {
     handleClickImg(e) {
       e.stopPropagation();
       e.preventDefault();
+    },
+    setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        const WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'https://__bridge_loaded__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0);
+    },
+    handleBuy() {
+      if (brower.checkIfIOS()) {
+        this.setupWebViewJavascriptBridge((bridge) => {
+          bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {
+            console.log('js log', response);
+          })
+        });
+      } else {
+        if (window.openGoodsD) {
+          window.openGoodsD('product Id here to pass');
+        }
+      }
     },
   },
 };
