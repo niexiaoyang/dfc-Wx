@@ -16,65 +16,65 @@
       <img src="@/assets/images/father/father-day-03.png" @click="handleClickImg" />
 
       <div class="first flex-sb-start">
-        <div class="baby baby-1">
+        <div class="baby baby-1" @click="handleBuy(list[1].id)">
           <img src="@/assets/images/father/baby-2.png" />
-          <div class="name">漪哚&棉服</div>
+          <div class="name">{{ list[1].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">51.00</div>
+            <div class="count">{{ list[1].price }}</div>
           </div>
         </div>
-        <div class="baby baby-2">
+        <div class="baby baby-2" @click="handleBuy(list[0].id)">
           <img src="@/assets/images/father/baby-1.png" />
-          <div class="name">创新服饰&拼色棉服</div>
+          <div class="name">{{ list[0].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">45.00</div>
+            <div class="count">{{ list[0].price }}</div>
           </div>
         </div>
       </div>
       <div class="second">
-        <div class="bg">
-          <div class="name">非童小可精品童装& 大拇指套装</div>
+        <div class="bg" @click="handleBuy(list[2].id)">
+          <div class="name">{{ list[2].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">33.00</div>
+            <div class="count">{{ list[2].price }}</div>
           </div>
         </div>
-        <img src="@/assets/images/father/baby-3.png" />
+        <img src="@/assets/images/father/baby-3.png" @click="handleBuy(list[2].id)" />
       </div>
     </div>
     <div class="box box-4">
       <img src="@/assets/images/father/father-day-04.png" @click="handleClickImg" />
-      <div class="baby">
+      <div class="baby" @click="handleBuy(list[3].id)">
         <img src="@/assets/images/father/baby-4.png" />
         <div class="info">
-          <div class="name">尚优童装&尚优篮球服</div>
+          <div class="name">{{ list[3].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">25.00</div>
+            <div class="count">{{ list[3].price }}</div>
           </div>
-          <div class="buy-btn flex-end" id="buy-btn" @click="handleBuy">立即去购买>></div>
+          <div class="buy-btn flex-end" id="buy-btn">立即去购买>></div>
         </div>
       </div>
     </div>
     <div class="box box-5">
       <img src="@/assets/images/father/father-day-05.png" @click="handleClickImg" />
       <div class="baby-wrapper">
-        <div class="baby-1">
+        <div class="baby-1" @click="handleBuy(list[4].id)">
           <img src="@/assets/images/father/baby-5.png" />
-          <div class="name">萌娃当家&西服短裤套装</div>
+          <div class="name">{{ list[4].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">48.00</div>
+            <div class="count">{{ list[4].price }}</div>
           </div>
         </div>
-        <div class="baby-2">
+        <div class="baby-2" @click="handleBuy(list[5].id)">
           <img src="@/assets/images/father/baby-6.png" />
-          <div class="name">可美兔&S17037西服套装</div>
+          <div class="name">{{ list[5].name }}</div>
           <div class="price-btn">
             <div class="label">供货价</div>
-            <div class="count">52.00</div>
+            <div class="count">{{ list[5].price }}</div>
           </div>
         </div>
       </div>
@@ -90,6 +90,33 @@ export default {
   name: 'Father',
   data() {
     return {
+      list: [
+        {
+          id: '73d906f8f45040e59f4f2fdafcf99286',
+          name: '秋装新款儿童两件套针织衫裙装',
+          price: '56.00',
+        }, {
+          id: '4d592055e8784f94bc3642f3c6ba232f',
+          name: '濮院《千代宝贝》精品童装毛衣',
+          price: '28.00',
+        }, {
+          id: 'adedcac5d35a4b8b9d289976ab695eb7',
+          name: '2018秋款韩版儿童牛仔背带裤',
+          price: '46.00',
+        }, {
+          id: 'f605c095eae140e5bcbbb349e4363006',
+          name: '中小女童短款可爱牛仔外套',
+          price: '41.00',
+        }, {
+          id: '159d72d93e5f42eda0ef699dfbd408a3',
+          name: '韩版中小童春秋休闲运动套装',
+          price: '37.00',
+        }, {
+          id: '589da62722c74ca4bfc4e81ea0dd749b',
+          name: '新款潮韩时尚撞色条纹连帽外套',
+          price: '36.00',
+        },
+      ],
     };
   },
   methods: {
@@ -97,16 +124,21 @@ export default {
       e.stopPropagation();
       e.preventDefault();
     },
-    handleBuy() {
-      const productId = '4d0ccf5b8b5a42d4a1654e273ab419d6';
+    handleBuy(productId) {
+      const payload = {
+        type: 'product',
+        data: {
+          id: productId,
+        },
+      };
+
       if (brower.checkIfIOS()) {
-        console.log('call ios start');
-        bridge.callHandler('testObjcCallback', productId, (response) => {
+        bridge.callHandler('callNavigation', payload, (response) => {
           console.log('JS got response', response);
         });
       } else {
         if (window.jsObj && window.jsObj.openGoodsD) {
-          window.jsObj.openGoodsD(productId);
+          window.jsObj.openGoodsD(payload);
         }
       }
     },
