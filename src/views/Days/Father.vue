@@ -98,13 +98,14 @@ export default {
       e.preventDefault();
     },
     handleBuy() {
+      const productId = '4d0ccf5b8b5a42d4a1654e273ab419d6';
       if (brower.checkIfIOS()) {
-        bridge.callHandler('testObjcCallback', { productId: 'testId' }, (response) => {
+        bridge.callHandler('testObjcCallback', productId, (response) => {
           console.log('JS got response', response);
         });
       } else {
         if (window.openGoodsD) {
-          window.openGoodsD('testId');
+          window.openGoodsD(productId);
         }
       }
     },
