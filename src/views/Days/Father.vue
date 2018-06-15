@@ -131,7 +131,7 @@ export default {
           id: productId,
         },
       };
-      const str = JSON.stringify(payload);
+      // const str = JSON.stringify(payload);
 
       if (brower.checkIfIOS()) {
         bridge.callHandler('callNavigation', payload, (response) => {
@@ -139,7 +139,7 @@ export default {
         });
       } else {
         if (window.jsObj && window.jsObj.callNavigation) {
-          window.jsObj.callNavigation(str);
+          window.jsObj.callNavigation(payload);
         }
       }
     },
