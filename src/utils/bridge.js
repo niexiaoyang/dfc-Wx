@@ -40,9 +40,10 @@ const JsBridge = {
       }
       console.log('call back', callback);
       window.WVJBCallbacks = [callback];
+
       const WVJBIframe = document.createElement('iframe');
       WVJBIframe.style.display = 'none';
-      WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+      WVJBIframe.src = 'https://__bridge_loaded__';
       document.documentElement.appendChild(WVJBIframe);
       setTimeout(() => {
         document.documentElement.removeChild(WVJBIframe);
