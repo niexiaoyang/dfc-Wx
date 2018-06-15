@@ -31,7 +31,7 @@ Object.keys(filters).forEach((key) => {
 });
 
 // vsconsole
-const DEBUG = false;
+const DEBUG = true;
 if (DEBUG) {
   const vconsole = new VConsole();
   console.log(vconsole);
