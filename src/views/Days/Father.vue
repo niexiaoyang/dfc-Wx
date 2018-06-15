@@ -104,8 +104,8 @@ export default {
           console.log('JS got response', response);
         });
       } else {
-        if (window.openGoodsD) {
-          window.openGoodsD(productId);
+        if (window.jsObj && window.jsObj.openGoodsD) {
+          window.jsObj.openGoodsD(productId);
         }
       }
     },
