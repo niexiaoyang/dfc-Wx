@@ -38,6 +38,7 @@ const JsBridge = {
       if (window.WVJBCallbacks) {
         return window.WVJBCallbacks.push(callback);
       }
+      console.log('call back', callback);
       window.WVJBCallbacks = [callback];
       const WVJBIframe = document.createElement('iframe');
       WVJBIframe.style.display = 'none';

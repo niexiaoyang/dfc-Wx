@@ -100,6 +100,7 @@ export default {
     handleBuy() {
       const productId = '4d0ccf5b8b5a42d4a1654e273ab419d6';
       if (brower.checkIfIOS()) {
+        console.log('call ios start');
         bridge.callHandler('testObjcCallback', productId, (response) => {
           console.log('JS got response', response);
         });
