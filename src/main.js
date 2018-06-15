@@ -30,8 +30,12 @@ Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
 
-const vconsole = new VConsole();
-console.log(vconsole);
+// vsconsole
+const DEBUG = false;
+if (DEBUG) {
+  const vconsole = new VConsole();
+  console.log(vconsole);
+}
 
 /* eslint-disable no-new */
 new Vue({
