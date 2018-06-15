@@ -138,7 +138,6 @@ export default {
           console.log('JS got response', response);
         });
       } else {
-        console.log('str', str);
         if (window.jsObj && window.jsObj.callNavigation) {
           window.jsObj.callNavigation(str);
         }
