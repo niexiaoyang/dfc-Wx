@@ -137,8 +137,8 @@ export default {
           console.log('JS got response', response);
         });
       } else {
-        if (window.jsObj && window.jsObj.openGoodsD) {
-          window.jsObj.openGoodsD(payload);
+        if (window.jsObj && window.jsObj.callNavigation) {
+          window.jsObj.callNavigation(payload);
         }
       }
     },
