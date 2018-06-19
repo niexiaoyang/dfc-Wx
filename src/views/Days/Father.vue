@@ -162,7 +162,7 @@ export default {
     }
 
     .name {
-      font-size: .185rem;
+      font-size: 18.5px;
     }
 
     img {
@@ -171,22 +171,22 @@ export default {
 
     .price-btn {
       display: flex;
-      width: 1.9rem;
-      height: .52rem;
-      line-height: .52rem;
-      font-size: .185rem;
+      width: 190px;
+      height: 52px;
+      line-height: 52px;
+      font-size: 18.5px;
       background-color: #ff8b34;
 
       .label {
-        width: .72rem;
+        width: 72px;
         text-align: center;
       }
 
       .count {
         flex: 1;
-        padding-left: .12rem;
+        padding-left: 12px;
         color: #ff8b34;
-        font-size: .32rem;
+        font-size: 32px;
         background-color: #ffffff;
       }
     }
@@ -194,31 +194,31 @@ export default {
     .box-2 {
       .rule-info {
         position: absolute;
-        top: 1.24rem;
-        left: .64rem;
-        right: .64rem;
-        font-size: .2rem;
-        line-height: .4rem;
+        top: 140px;
+        left: 56px;
+        right: 56px;
+        font-size: 20px;
+        line-height: 40px;
         color: #ed5129;
-        letter-spacing: .02rem;
+        letter-spacing: 2px;
       }
     }
 
     .box-3 {
       .first {
         position: absolute;
-        top: 1.8rem;
-        left: .32rem;
-        right: .38rem;
-        height: 6.15rem;
+        top: 180px;
+        left: 32px;
+        right: 38px;
+        height: 615px;
 
         .baby {
-          border: .07rem solid #ffffff;
+          border: 7px solid #ffffff;
         }
 
         .baby-1 {
-          width: 3.26rem;
-          height: 3.26rem;
+          width: 326px;
+          height: 326px;
           align-self: flex-end;
 
           img {
@@ -228,65 +228,65 @@ export default {
 
           .name {
             position: absolute;
-            left: .22rem;
-            bottom: .92rem;
-            text-shadow: .01rem .01rem .01rem rgba($color: #000000, $alpha: 0.7)
+            left: 22px;
+            bottom: 92px;
+            text-shadow: 1px 1px .01px rgba($color: #000000, $alpha: 0.7)
           }
 
           .price-btn {
             position: absolute;
-            left: .22rem;
-            bottom: .22rem;
+            left: 22px;
+            bottom: 22px;
           }
         }
 
         .baby-2 {
-          margin-left: .24rem;
-          width: 3.26rem;
-          height: 4.95rem;
+          margin-left: 24px;
+          width: 326px;
+          height: 495px;
           background-color: #3ca0e7;
 
           img {
-            height: 3.12rem;
-            border-bottom: .07rem solid #ffffff;
+            height: 312px;
+            border-bottom: 7px solid #ffffff;
           }
 
           .name {
-            margin-top: .3rem;
-            margin-left: .12rem;
+            margin-top: 30px;
+            margin-left: 12px;
           }
 
           .price-btn {
-            margin-top: .24rem;
-            margin-left: .12rem;
+            margin-top: 24px;
+            margin-left: 12px;
           }
         }
       }
 
       .second {
         position: absolute;
-        bottom: .1rem;
-        left: .3rem;
-        right: .3rem;
+        bottom: 10px;
+        left: 30px;
+        right: 30px;
         .bg {
-          padding-left: .2rem;
-          margin-bottom: .32rem;
-          height: 3.3rem;
+          padding-left: 20px;
+          margin-bottom: 32px;
+          height: 330px;
           background-color: #ffffff;
-          border: .07rem solid #3ca0e7;
+          border: 7px solid #3ca0e7;
 
           .name {
-            margin-top: .92rem;
-            width: 2.08rem;
+            margin-top: 92px;
+            width: 208px;
             color: #000000;
-            font-size: .24rem;
+            font-size: 24px;
           }
 
           .price-btn {
-            margin-top: .4rem;
+            margin-top: 40px;
 
             .count {
-              margin: .02rem;
+              margin: 2px;
             }
           }
         }
@@ -295,10 +295,10 @@ export default {
           position: absolute;
           bottom: 0;
           right: 0;
-          width: 4.32rem;
-          height: 4.03rem;
-          border: .07rem solid #ffffff;
-          border-radius: .07rem;
+          width: 432px;
+          height: 403px;
+          border: 7px solid #ffffff;
+          border-radius: 7px;
         }
       }
     }
@@ -306,31 +306,31 @@ export default {
     .box-4 {
       .baby {
         position: absolute;
-        top: 2.7rem;
-        left: .54rem;
-        right: .54rem ;
-        height: 3.25rem;
+        top: 270px;
+        left: 54px;
+        right: 54px ;
+        height: 325px;
         display: flex;
-        font-size: .24rem;
-        border: .07rem solid #ffffff;
+        font-size: 24px;
+        border: 7px solid #ffffff;
         background-color: #db603f;
 
         img {
           height: 100%;
-          width: 3.22rem;
+          width: 322px;
         }
 
         .info {
           flex: 1;
-          padding: .68rem .32rem .28rem .18rem;
+          padding: 68px 32px 28px 18px;
         }
 
         .price-btn {
-          margin-top: .28rem;
+          margin-top: 28px;
         }
 
         .buy-btn {
-          margin-top: .78rem;
+          margin-top: 56px;
         }
       }
     }
@@ -338,34 +338,34 @@ export default {
     .box-5 {
       .baby-wrapper {
         position: absolute;
-        bottom: .4rem;
-        left: .65rem;
-        right: .6rem;
+        top: 180px;
+        left: 65px;
+        right: 60px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
 
         img {
           width: 100%;
-          border: .07rem solid #ffffff;
+          border: 7px solid #ffffff;
         }
       }
 
       .name {
-        margin-top: .24rem;
+        margin-top: 24px;
       }
 
       .price-btn {
-        margin-top: .22rem;
+        margin-top: 22px;
       }
 
       .baby-1 {
-        width: 2.2rem;
+        width: 220px;
       }
 
       .baby-2 {
-        margin-left: 0.32rem;
-        width: 3.25rem;
+        margin-left: 32px;
+        width: 325px;
       }
     }
   }

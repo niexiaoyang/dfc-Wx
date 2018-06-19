@@ -29,7 +29,11 @@ html {
 body {
   margin: 0;
   height: 100%;
-  @include font-dpr(16px);
+  font-size: 14px;
+}
+
+img {
+  content: normal !important;
 }
 
 #app {
