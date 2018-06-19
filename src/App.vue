@@ -12,9 +12,6 @@ export default {
 </script>
 
 <style lang="less">
-@datetime-header-item-cancel-font-color: red;
-@import '~vux/src/styles/reset.less';
-@import '~vux/src/styles/close.less';
 @import './styles/vux-ui.less';
 
 #app {
