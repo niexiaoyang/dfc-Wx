@@ -1,7 +1,7 @@
 <template>
   <div class="rank-page">
     <header class="flex-sb">
-      <div class="arrow">
+      <div class="arrow" @click="handleDateStep(-1)">
         <svg-icon icon-class="left-arrow" color="#979797" size="16px" />
       </div>
       <div class="date-wrapper flex-column-center">
@@ -31,7 +31,7 @@
         </datetime>
         <div class="total-count">50238.00元</div>
       </div>
-      <div class="arrow">
+      <div class="arrow" @click="handleDateStep(1)">
         <svg-icon icon-class="right-arrow" color="#979797" size="16px" />
       </div>
     </header>
@@ -88,7 +88,7 @@ export default {
       week: [],
       weekList: [],
       // 搜索类型: 日，月，周
-      searchType: 'day',
+      searchType: 'week',
     };
   },
   created() {
@@ -137,6 +137,21 @@ export default {
       }
 
       this.weekList = weekList;
+    },
+    handleDateStep(num) {
+      if (this.searchType === 'week') {
+        const index = this.weekList.findIndex(item => item === this.week[0]);
+        if ((index <= 0 && num < 0) || (index >= (this.weekList.length - 1) && num > 0)) {
+          return;
+        }
+
+        this.week = [this.weekList[index + num]];
+      } else {
+        const date = dayjs(this.date);
+        const newDate = date.add(num, this.searchType);
+        const format = this.searchType === 'day' ? 'YYYY-MM-DD' : 'YYYY-MM';
+        this.date = newDate.format(format);
+      }
     },
     handleChangeDate() {},
     onChangeWeek() {},
