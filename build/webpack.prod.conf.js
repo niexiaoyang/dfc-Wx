@@ -81,7 +81,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing'
         ? 'share.html'
-        : config.build.index,
+        : config.build.share,
       template: 'share.html',
       inject: true,
       minify: {
