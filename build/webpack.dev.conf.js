@@ -58,6 +58,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
+    new HtmlWebpackPlugin({
+      filename: 'share.html',
+      template: 'share.html',
+      inject: true
+    }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {

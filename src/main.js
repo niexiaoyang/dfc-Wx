@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
+import { TransferDom } from 'vux';
+import FastClick from 'fastclick';
 import VConsole from 'vconsole';
 
 import './styles/index.scss';
@@ -19,6 +21,8 @@ import './permission'; // permission control
 
 Vue.config.productionTip = false;
 
+Vue.directive('transfer-dom', TransferDom);
+
 // register components
 install(Vue);
 
@@ -36,6 +40,8 @@ if (DEBUG) {
   const vconsole = new VConsole();
   console.log(vconsole);
 }
+
+FastClick.attach(document.body);
 
 /* eslint-disable no-new */
 new Vue({

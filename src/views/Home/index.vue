@@ -16,7 +16,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  .home-page {
-    font-size: 1rem;
-  }
 </style>

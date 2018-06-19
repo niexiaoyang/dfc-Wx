@@ -13,6 +13,10 @@ export const constantRouterMap = [
     path: '/fatherDay',
     component: asyncImport('Days/Father'),
   },
+  {
+    path: '/rank',
+    component: asyncImport('Rank'),
+  },
 ];
 
 export default new Router({
