@@ -162,7 +162,7 @@ export default {
     }
 
     .name {
-      font-size: 18.5px;
+      font-size: 9px;
     }
 
     img {
@@ -171,22 +171,22 @@ export default {
 
     .price-btn {
       display: flex;
-      width: 190px;
-      height: 52px;
-      line-height: 52px;
-      font-size: 18.5px;
+      width: 95px;
+      height: 26px;
+      line-height: 26px;
+      font-size: 9px;
       background-color: #ff8b34;
 
       .label {
-        width: 72px;
+        width: 36px;
         text-align: center;
       }
 
       .count {
         flex: 1;
-        padding-left: 12px;
+        padding-left: 6px;
         color: #ff8b34;
-        font-size: 32px;
+        font-size: 16px;
         background-color: #ffffff;
       }
     }
@@ -194,31 +194,31 @@ export default {
     .box-2 {
       .rule-info {
         position: absolute;
-        top: 140px;
-        left: 56px;
-        right: 56px;
-        font-size: 20px;
-        line-height: 40px;
+        top: 70px;
+        left: 28px;
+        right: 28px;
+        font-size: 10px;
+        line-height: 20px;
         color: #ed5129;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
       }
     }
 
     .box-3 {
       .first {
         position: absolute;
-        top: 180px;
-        left: 32px;
-        right: 38px;
-        height: 615px;
+        top: 90px;
+        left: 16px;
+        right: 19px;
+        height: 307px;
 
         .baby {
-          border: 7px solid #ffffff;
+          border: 3px solid #ffffff;
         }
 
         .baby-1 {
-          width: 326px;
-          height: 326px;
+          width: 163px;
+          height: 163px;
           align-self: flex-end;
 
           img {
@@ -228,65 +228,64 @@ export default {
 
           .name {
             position: absolute;
-            left: 22px;
-            bottom: 92px;
+            left: 11px;
+            bottom: 46px;
             text-shadow: 1px 1px .01px rgba($color: #000000, $alpha: 0.7)
           }
 
           .price-btn {
             position: absolute;
-            left: 22px;
-            bottom: 22px;
+            left: 11px;
+            bottom: 11px;
           }
         }
 
         .baby-2 {
-          margin-left: 24px;
-          width: 326px;
-          height: 495px;
+          margin-left: 12px;
+          width: 163px;
+          height: 248px;
           background-color: #3ca0e7;
 
           img {
-            height: 312px;
-            border-bottom: 7px solid #ffffff;
+            height: 156px;
+            border-bottom: 3px solid #ffffff;
           }
 
           .name {
-            margin-top: 30px;
-            margin-left: 12px;
+            margin-top: 15px;
+            margin-left: 6px;
           }
 
           .price-btn {
-            margin-top: 24px;
-            margin-left: 12px;
+            margin-top: 12px;
+            margin-left: 6px;
           }
         }
       }
 
       .second {
         position: absolute;
-        bottom: 10px;
-        left: 30px;
-        right: 30px;
+        bottom: 5px;
+        left: 15px;
+        right: 15px;
         .bg {
-          padding-left: 20px;
-          margin-bottom: 32px;
-          height: 330px;
+          padding-left: 10px;
+          margin-bottom: 16px;
+          height: 165px;
           background-color: #ffffff;
-          border: 7px solid #3ca0e7;
+          border: 3px solid #3ca0e7;
 
           .name {
-            margin-top: 92px;
-            width: 208px;
+            margin-top: 46px;
+            width: 104px;
             color: #000000;
-            font-size: 24px;
           }
 
           .price-btn {
-            margin-top: 40px;
+            margin-top: 20px;
 
             .count {
-              margin: 2px;
+              margin: 1px;
             }
           }
         }
@@ -295,10 +294,10 @@ export default {
           position: absolute;
           bottom: 0;
           right: 0;
-          width: 432px;
-          height: 403px;
-          border: 7px solid #ffffff;
-          border-radius: 7px;
+          width: 216px;
+          height: 201px;
+          border: 3px solid #ffffff;
+          border-radius: 3px;
         }
       }
     }
@@ -306,31 +305,31 @@ export default {
     .box-4 {
       .baby {
         position: absolute;
-        top: 270px;
-        left: 54px;
-        right: 54px ;
-        height: 325px;
+        top: 135px;
+        left: 27px;
+        right: 27px ;
+        height: 162px;
         display: flex;
-        font-size: 24px;
-        border: 7px solid #ffffff;
+        font-size: 12px;
+        border: 3px solid #ffffff;
         background-color: #db603f;
 
         img {
           height: 100%;
-          width: 322px;
+          width: 160px;
         }
 
         .info {
           flex: 1;
-          padding: 68px 32px 28px 18px;
+          padding: 39px 16px 14px 9px;
         }
 
         .price-btn {
-          margin-top: 28px;
+          margin-top: 14px;
         }
 
         .buy-btn {
-          margin-top: 56px;
+          margin-top: 28px;
         }
       }
     }
@@ -338,34 +337,34 @@ export default {
     .box-5 {
       .baby-wrapper {
         position: absolute;
-        top: 180px;
-        left: 65px;
-        right: 60px;
+        top: 90px;
+        left: 32px;
+        right: 30px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
 
         img {
           width: 100%;
-          border: 7px solid #ffffff;
+          border: 3px solid #ffffff;
         }
       }
 
       .name {
-        margin-top: 24px;
+        margin-top: 12px;
       }
 
       .price-btn {
-        margin-top: 22px;
+        margin-top: 11px;
       }
 
       .baby-1 {
-        width: 220px;
+        width: 110px;
       }
 
       .baby-2 {
-        margin-left: 32px;
-        width: 325px;
+        margin-left: 16px;
+        width: 162px;
       }
     }
   }

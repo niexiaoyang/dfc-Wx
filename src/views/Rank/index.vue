@@ -2,7 +2,7 @@
   <div class="rank-page">
     <header class="flex-sb">
       <div class="arrow" @click="handleDateStep(-1)">
-        <svg-icon icon-class="left-arrow" color="#979797" size="16px" />
+        <svg-icon icon-class="left-arrow" color="#979797" size="4.267vw" />
       </div>
       <div class="date-wrapper flex-column-center">
         <div class="flex-row" v-if="searchType === 'week'">
@@ -15,7 +15,7 @@
             popup-title="请选择日期"
           >
           </popup-picker>
-          <svg-icon icon-class="bottom-arrow" color="#979797" size="16px" style="margin-left: 7px" />
+          <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
         </div>
         <datetime
           v-else
@@ -26,13 +26,13 @@
         >
           <div class="flex-row">
             <div class="date">{{ date }}</div>
-            <svg-icon icon-class="bottom-arrow" color="#979797" size="16px" style="margin-left: 7px" />
+            <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
           </div>
         </datetime>
         <div class="total-count">50238.00元</div>
       </div>
       <div class="arrow" @click="handleDateStep(1)">
-        <svg-icon icon-class="right-arrow" color="#979797" size="16px" />
+        <svg-icon icon-class="right-arrow" color="#979797" size="4.267vw" />
       </div>
     </header>
     <div class="data-wrapper">
@@ -50,7 +50,7 @@
           </thead>
           <tbody>
             <tr>
-              <td style="font-size: 12px; line-height: 12px;">
+              <td style="font-size: 3.2vw; line-height: 3.2vw;">
                 <div>2018.05.09</div>
                 <div>17:48</div>
               </td>
@@ -189,7 +189,7 @@ export default {
         left: 2px;
         right: 2px;
         height:9px;
-        border-radius:100px;
+        border-radius: 9px;
         background:#ff4444;
       }
 
