@@ -5,16 +5,8 @@
         <svg-icon icon-class="left-arrow" color="#979797" size="4.267vw" />
       </div>
       <div class="date-wrapper flex-column-center">
-        <div class="flex-row" v-if="searchType === 'week'">
-          <popup-picker
-            :data="[weekList]"
-            v-model="week"
-            @on-change="onChangeWeek"
-            value-text-align="center"
-            confirm-text="确定"
-            popup-title="请选择日期"
-          >
-          </popup-picker>
+        <div class="flex-row" v-if="searchType === 'week'" @click="handleShowWeek">
+          <div>{{ week[0] }}</div>
           <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
         </div>
         <datetime
@@ -63,6 +55,23 @@
         </x-table>
       </div>
     </div>
+
+
+    <popup v-model="showWeek">
+      <div class="popup-week">
+        <popup-header
+          left-text="取消"
+          right-text="确定"
+          title="请选择日期"
+          @on-click-left="showWeek = false"
+          @on-click-right="handleChangeWeek"
+        ></popup-header>
+        <picker
+          :data="[weekList]"
+          v-model="pickerWeek"
+        ></picker>
+      </div>
+    </popup>
   </div>
 </template>
 
@@ -72,7 +81,9 @@ import dayjs from 'dayjs';
 import {
   XTable,
   Datetime,
-  PopupPicker,
+  Picker,
+  Popup,
+  PopupHeader,
 } from 'vux';
 
 export default {
@@ -80,15 +91,19 @@ export default {
   components: {
     XTable,
     Datetime,
-    PopupPicker,
+    Picker,
+    Popup,
+    PopupHeader,
   },
   data() {
     return {
       date: '',
       week: [],
+      pickerWeek: [],
       weekList: [],
       // 搜索类型: 日，月，周
-      searchType: 'week',
+      searchType: 'month',
+      showWeek: false,
     };
   },
   created() {
@@ -153,8 +168,15 @@ export default {
         this.date = newDate.format(format);
       }
     },
+    handleShowWeek() {
+      this.pickerWeek = [...this.week];
+      this.showWeek = true;
+    },
     handleChangeDate() {},
-    onChangeWeek() {},
+    handleChangeWeek() {
+      this.week = [...this.pickerWeek];
+      this.showWeek = false;
+    },
   },
 };
 </script>
