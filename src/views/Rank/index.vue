@@ -121,8 +121,8 @@ export default {
       // total money
       total: 0,
       list: [],
-      // 列表类型: store, profit, employee, product
-      listType: 'custom',
+      // 列表类型: store, profit, employee, product, custom
+      listType: 'store',
       // 搜索类型: 日，月，周
       searchType: 'month',
       showWeek: false,
@@ -131,6 +131,8 @@ export default {
   created() {
     this.initDate();
     this.initWeekDate();
+    const { query: { listType } } = this.$route;
+    this.listType = listType;
 
     if (brower.checkIfIOS()) {
       bridge.registerHandler('replyPayload', (res) => {
