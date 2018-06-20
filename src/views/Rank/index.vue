@@ -123,7 +123,7 @@ export default {
       // 列表类型: store, profit, employee, product, custom
       listType: 'store',
       // 搜索类型: 日，月，周
-      searchType: 'month',
+      searchType: 'day',
       showWeek: false,
     };
   },
