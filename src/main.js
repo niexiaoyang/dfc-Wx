@@ -48,14 +48,6 @@ if (!window.bridge) {
   window.bridge = {};
 }
 
-window.callTest = (res) => {
-  console.log('callTest', res);
-}
-
-window.bridge.callTest = (res) => {
-  console.log('bridge callTest', res);
-}
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

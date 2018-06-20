@@ -82,7 +82,6 @@ import {
   Popup,
   PopupHeader,
 } from 'vux';
-import { defaultCoreCipherList } from 'constants';
 
 export default {
   name: 'Rank',
@@ -139,12 +138,16 @@ export default {
 
     if (brower.checkIfIOS()) {
       bridge.registerHandler('replyPayload', (res) => {
-        console.log('JS got response', res);
+        const { searchType } = res;
+        this.searchType = searchType;
+        this.refreshQuery();
       });
     } else {
       window.bridge.replyPayload = (res) => {
-        console.log('android response', res);
-      }
+        const { searchType } = res;
+        this.searchType = searchType;
+        this.refreshQuery();
+      };
     }
   },
   watch: {
@@ -161,7 +164,7 @@ export default {
   },
   methods: {
     refreshQuery() {
-      switch(this.searchType) {
+      switch (this.searchType) {
         case 'day': {
           this.listQuery = {
             beginDate: '',
@@ -193,7 +196,7 @@ export default {
       this.getList();
     },
     getList() {
-      switch(this.listType) {
+      switch (this.listType) {
         case 'store': {
           getStorePerformance(this.listQuery).then((res) => {
             const { data: { list, turnover } } = res;
