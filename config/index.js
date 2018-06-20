@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/apis': {
-        target: 'http://testadmin.dfcshop.com',  // 接口域名
+        target: 'http://testmobile.dfcshop.com',  // 接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
           '^/apis': ''   //需要rewrite的,

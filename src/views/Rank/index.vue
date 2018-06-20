@@ -21,7 +21,7 @@
             <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
           </div>
         </datetime>
-        <div class="total-count">50238.00元</div>
+        <div class="total-count">{{ `${total}元` }}</div>
       </div>
       <div class="arrow" @click="handleDateStep(1)">
         <svg-icon icon-class="right-arrow" color="#979797" size="4.267vw" />
@@ -33,23 +33,12 @@
         <x-table :cell-bordered="false" style="background-color:#fff;">
           <thead>
             <tr>
-              <th>时间</th>
-              <th>客户</th>
-              <th>金额</th>
-              <th>折扣率</th>
-              <th>营业员</th>
+              <th v-for="(item, i) in headerListMap[listType]" :key="i">{{ item }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td style="font-size: 3.2vw; line-height: 3.2vw;">
-                <div>2018.05.09</div>
-                <div>17:48</div>
-              </td>
-              <td>某某某</td>
-              <td>25720.00</td>
-              <td>200</td>
-              <td>李招财</td>
+            <tr v-for="(item, i) in list" :key="i">
+              <td v-for="(field, j) in filedListMap[listType]" :key="`${i}-${j}`">{{ item[field] }}</td>
             </tr>
           </tbody>
         </x-table>
@@ -76,8 +65,16 @@
 </template>
 
 <script>
+import {
+  getStorePerformance,
+  getProfitReport,
+  getEmployeeRank,
+  getProductRank,
+  getCustomRank,
+} from '@/api/invoice';
 import dayjs from 'dayjs';
-
+import brower from '@/utils/brower';
+import bridge from '@/utils/bridge';
 import {
   XTable,
   Datetime,
@@ -85,6 +82,7 @@ import {
   Popup,
   PopupHeader,
 } from 'vux';
+import { defaultCoreCipherList } from 'constants';
 
 export default {
   name: 'Rank',
@@ -97,10 +95,34 @@ export default {
   },
   data() {
     return {
+      listQuery: {
+        currentDate: '',
+        beginDate: '',
+        endDate: '',
+      },
       date: '',
       week: [],
       pickerWeek: [],
       weekList: [],
+      headerListMap: {
+        store: ['时间', '客户', '金额', '折扣率', '营业员'],
+        profit: ['客户', '业绩', '利润', '利润率'],
+        employee: ['员工', '数量', '金额', '提成', '百分比'],
+        product: ['商品', '数量', '金额', '百分比'],
+        custom: ['客户', '数量', '金额', '均价', '百分比'],
+      },
+      filedListMap: {
+        store: ['orderDate', 'customerName', 'amount', 'discountRate', 'salesClerk'],
+        profit: ['customName', 'amount', 'profit', 'profitRate'],
+        employee: ['userName', 'num', 'amount', 'extract', 'accounting'],
+        product: ['productName', 'num', 'amount', 'accounting'],
+        custom: ['customName', 'num', 'amount', 'avgPrice', 'accounting'],
+      },
+      // total money
+      total: 0,
+      list: [],
+      // 列表类型: store, profit, employee, product
+      listType: 'custom',
       // 搜索类型: 日，月，周
       searchType: 'month',
       showWeek: false,
@@ -109,8 +131,107 @@ export default {
   created() {
     this.initDate();
     this.initWeekDate();
+
+    if (brower.checkIfIOS()) {
+      bridge.registerHandler('replyPayload', (res) => {
+        console.log('JS got response', res);
+      });
+    } else {
+      window.bridge.replyPayload = (res) => {
+        console.log('android response', res);
+      }
+    }
+  },
+  watch: {
+    date() {
+      if (this.searchType === 'day' || this.searchType === 'month') {
+        this.refreshQuery();
+      }
+    },
+    week() {
+      if (this.searchType === 'week') {
+        this.refreshQuery();
+      }
+    },
   },
   methods: {
+    refreshQuery() {
+      switch(this.searchType) {
+        case 'day': {
+          this.listQuery = {
+            beginDate: '',
+            endDate: '',
+            currentDate: this.date,
+          };
+          break;
+        }
+        case 'month': {
+          this.listQuery = {
+            beginDate: dayjs(this.date).format('YYYY-MM-DD'),
+            endDate: dayjs(this.date).endOf('month').format('YYYY-MM-DD'),
+            currentDate: '',
+          };
+          break;
+        }
+        case 'week': {
+          const arr = this.week[0].split(' — ');
+          this.listQuery = {
+            beginDate: dayjs(arr[0]).format('YYYY-MM-DD'),
+            endDate: dayjs(arr[1]).format('YYYY-MM-DD'),
+            currentDate: '',
+          };
+          break;
+        }
+        default:
+      }
+
+      this.getList();
+    },
+    getList() {
+      switch(this.listType) {
+        case 'store': {
+          getStorePerformance(this.listQuery).then((res) => {
+            const { data: { list, turnover } } = res;
+            this.list = list;
+            this.total = turnover;
+          });
+          break;
+        }
+        case 'profit': {
+          getProfitReport(this.listQuery).then((res) => {
+            const { data: { list, turnover } } = res;
+            this.list = list;
+            this.total = turnover;
+          });
+          break;
+        }
+        case 'employee': {
+          getEmployeeRank(this.listQuery).then((res) => {
+            const { data: { list, turnover } } = res;
+            this.list = list;
+            this.total = turnover;
+          });
+          break;
+        }
+        case 'product': {
+          getProductRank(this.listQuery).then((res) => {
+            const { data: { list, turnover } } = res;
+            this.list = list;
+            this.total = turnover;
+          });
+          break;
+        }
+        case 'custom': {
+          getCustomRank(this.listQuery).then((res) => {
+            const { data: { list, turnover } } = res;
+            this.list = list;
+            this.total = turnover;
+          });
+          break;
+        }
+        default:
+      }
+    },
     initDate() {
       const currDate = dayjs();
       this.date = this.searchType === 'day' ? currDate.format('YYYY-MM-DD') : currDate.format('YYYY-MM');
@@ -128,7 +249,7 @@ export default {
 
       // 搜集周列表
       let weekList = [];
-      const WeekLength = 10;
+      const WeekLength = 20;
       // 本周前
       for (let i = 0; i < WeekLength; i += 1) {
         newStartDate = startDate.subtract(7 * i, 'day');
@@ -223,6 +344,19 @@ export default {
 
         thead {
           background-image:linear-gradient(-180deg, #ffe0e0 0%, #ffffff 6%);
+        }
+
+        tbody {
+          tr {
+            td {
+              min-width: 70px;
+            }
+
+            td:first-child {
+              font-size: 3.2vw;
+              line-height: 3.2vw;
+            }
+          }
         }
       }
     }

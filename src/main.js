@@ -43,6 +43,11 @@ if (DEBUG) {
 
 FastClick.attach(document.body);
 
+if (!window.bridge) {
+  // 混合页面初始化对象(主要是安卓)
+  window.bridge = {};
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
