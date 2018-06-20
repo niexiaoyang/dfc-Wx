@@ -14,7 +14,6 @@
           v-model="date"
           @on-change="handleChangeDate"
           clear-text="请选择日期"
-          :format="searchType === 'day' ? 'YYYY-MM-DD' : 'YYYY-MM'"
         >
           <div class="flex-row">
             <div class="date">{{ date }}</div>
@@ -44,7 +43,6 @@
         </x-table>
       </div>
     </div>
-
 
     <popup v-model="showWeek">
       <div class="popup-week">
@@ -161,6 +159,13 @@ export default {
         this.refreshQuery();
       }
     },
+    searchType(val) {
+      if (val === 'day' || val === 'month') {
+        this.initDate();
+      } else {
+        this.initWeekDate();
+      }
+    },
   },
   methods: {
     refreshQuery() {
@@ -175,7 +180,7 @@ export default {
         }
         case 'month': {
           this.listQuery = {
-            beginDate: dayjs(this.date).format('YYYY-MM-DD'),
+            beginDate: dayjs(this.date).startOf('month').format('YYYY-MM-DD'),
             endDate: dayjs(this.date).endOf('month').format('YYYY-MM-DD'),
             currentDate: '',
           };
