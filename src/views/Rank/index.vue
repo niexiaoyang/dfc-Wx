@@ -10,13 +10,24 @@
           <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
         </div>
         <datetime
-          v-else
-          v-model="date"
-          @on-change="handleChangeDate"
+          v-else-if="searchType === 'day'"
+          v-model="day"
           clear-text="请选择日期"
+          format="YYYY-MM-DD"
         >
           <div class="flex-row">
-            <div class="date">{{ date }}</div>
+            <div class="date">{{ day }}</div>
+            <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
+          </div>
+        </datetime>
+        <datetime
+          v-else
+          v-model="month"
+          clear-text="请选择日期"
+          format="YYYY-MM"
+        >
+          <div class="flex-row">
+            <div class="date">{{ month }}</div>
             <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
           </div>
         </datetime>
@@ -97,7 +108,8 @@ export default {
         beginDate: '',
         endDate: '',
       },
-      date: '',
+      day: '',
+      month: '',
       week: [],
       pickerWeek: [],
       weekList: [],
@@ -149,8 +161,13 @@ export default {
     }
   },
   watch: {
-    date() {
-      if (this.searchType === 'day' || this.searchType === 'month') {
+    day() {
+      if (this.searchType === 'day') {
+        this.refreshQuery();
+      }
+    },
+    month() {
+      if (this.searchType === 'month') {
         this.refreshQuery();
       }
     },
@@ -159,12 +176,8 @@ export default {
         this.refreshQuery();
       }
     },
-    searchType(val) {
-      if (val === 'day' || val === 'month') {
-        this.initDate();
-      } else {
-        this.initWeekDate();
-      }
+    searchType() {
+      this.refreshQuery();
     },
   },
   methods: {
@@ -174,14 +187,14 @@ export default {
           this.listQuery = {
             beginDate: '',
             endDate: '',
-            currentDate: this.date,
+            currentDate: this.day,
           };
           break;
         }
         case 'month': {
           this.listQuery = {
-            beginDate: dayjs(this.date).startOf('month').format('YYYY-MM-DD'),
-            endDate: dayjs(this.date).endOf('month').format('YYYY-MM-DD'),
+            beginDate: dayjs(this.month).startOf('month').format('YYYY-MM-DD'),
+            endDate: dayjs(this.month).endOf('month').format('YYYY-MM-DD'),
             currentDate: '',
           };
           break;
@@ -247,7 +260,8 @@ export default {
     },
     initDate() {
       const currDate = dayjs();
-      this.date = this.searchType === 'day' ? currDate.format('YYYY-MM-DD') : currDate.format('YYYY-MM');
+      this.day = currDate.format('YYYY-MM-DD');
+      this.month = currDate.format('YYYY-MM');
     },
     initWeekDate() {
       const currDate = dayjs();
@@ -295,18 +309,20 @@ export default {
         }
 
         this.week = [this.weekList[index + num]];
-      } else {
-        const date = dayjs(this.date);
+      } else if (this.searchType === 'day') {
+        const date = dayjs(this.day);
         const newDate = date.add(num, this.searchType);
-        const format = this.searchType === 'day' ? 'YYYY-MM-DD' : 'YYYY-MM';
-        this.date = newDate.format(format);
+        this.day = newDate.format('YYYY-MM-DD');
+      } else {
+        const date = dayjs(this.month);
+        const newDate = date.add(num, this.searchType);
+        this.month = newDate.format('YYYY-MM');
       }
     },
     handleShowWeek() {
       this.pickerWeek = [...this.week];
       this.showWeek = true;
     },
-    handleChangeDate() {},
     handleChangeWeek() {
       this.week = [...this.pickerWeek];
       this.showWeek = false;
