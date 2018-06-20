@@ -132,7 +132,10 @@ export default {
     this.initDate();
     this.initWeekDate();
     const { query: { listType } } = this.$route;
-    this.listType = listType;
+
+    if (listType) {
+      this.listType = listType;
+    }
 
     if (brower.checkIfIOS()) {
       bridge.registerHandler('replyPayload', (res) => {
