@@ -55,9 +55,9 @@
       </div>
     </div>
 
-    <div @click="searchType = 'day'">change to day</div>
+    <!-- <div @click="searchType = 'day'">change to day</div>
     <div @click="searchType = 'week'">change to week</div>
-    <div @click="searchType = 'month'">change to month</div>
+    <div @click="searchType = 'month'">change to month</div> -->
 
     <popup v-model="showWeek">
       <div class="popup-week">
@@ -154,7 +154,6 @@ export default {
       bridge.registerHandler('replyPayload', (res) => {
         const { searchType } = res;
         this.searchType = searchType;
-        console.log('searchType', searchType);
         this.refreshQuery();
       });
     } else {
