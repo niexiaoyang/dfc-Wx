@@ -5,12 +5,12 @@
         <svg-icon icon-class="left-arrow" color="#979797" size="4.267vw" />
       </div>
       <div class="date-wrapper flex-column-center">
-        <div class="flex-row" v-if="searchType === 'week'" @click="handleShowWeek">
+        <div class="flex-row" v-show="searchType === 'week'" @click="handleShowWeek">
           <div>{{ week[0] }}</div>
           <svg-icon icon-class="bottom-arrow" color="#979797" size="4.267vw" style="margin-left: 1.867vw" />
         </div>
         <datetime
-          v-else-if="searchType === 'day'"
+          v-show="searchType === 'day'"
           v-model="day"
           clear-text="请选择日期"
           format="YYYY-MM-DD"
@@ -21,7 +21,7 @@
           </div>
         </datetime>
         <datetime
-          v-else
+          v-show="searchType === 'month'"
           v-model="month"
           clear-text="请选择日期"
           format="YYYY-MM"
@@ -54,6 +54,10 @@
         </x-table>
       </div>
     </div>
+
+    <div @click="searchType = 'day'">change to day</div>
+    <div @click="searchType = 'week'">change to week</div>
+    <div @click="searchType = 'month'">change to month</div>
 
     <popup v-model="showWeek">
       <div class="popup-week">
@@ -150,6 +154,7 @@ export default {
       bridge.registerHandler('replyPayload', (res) => {
         const { searchType } = res;
         this.searchType = searchType;
+        console.log('searchType', searchType);
         this.refreshQuery();
       });
     } else {
