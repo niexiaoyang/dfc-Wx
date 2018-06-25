@@ -17,6 +17,10 @@ export const constantRouterMap = [
     path: '/rank',
     component: asyncImport('Rank'),
   },
+  {
+    path: '/debt',
+    component: asyncImport('Debt'),
+  },
 ];
 
 export default new Router({
