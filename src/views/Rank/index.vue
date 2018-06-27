@@ -335,6 +335,16 @@ export default {
 };
 </script>
 
+<style lang="scss">
+  .rank-page {
+    .weui-cell {
+      &:before {
+        display: none;
+      }
+    }
+  }
+</style>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   .rank-page {
