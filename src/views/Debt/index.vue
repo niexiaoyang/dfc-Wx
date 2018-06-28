@@ -1,7 +1,7 @@
 <template>
   <div class="debt-page">
     <div class="search-wrapper">
-      <input type="text" v-model="listQuery.search" ref="search" placeholder="请输入关键字" />
+      <input type="text" v-model="listQuery.search" ref="search" placeholder="请输入关键字" @keyup.enter="getList" />
       <div class="search-tag flex-center" v-show="!searching" @click="handleSearch">
         <icon type="search"></icon>
         <span class="label">搜索</span>
@@ -16,18 +16,12 @@
         <x-table :cell-bordered="false" style="background-color:#fff;">
           <thead>
             <tr>
-              <th>时间</th>
-              <th>客户</th>
-              <th>订单金额</th>
-              <th>已付金额</th>
+              <th v-for="(item, i) in headerListMap[listType]" :key="i">{{ item }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2018.05.09</td>
-              <td>蔡晟烨</td>
-              <td>25720.00</td>
-              <td>20000.00</td>
+            <tr v-for="(item, i) in list" :key="i">
+              <td v-for="(field, j) in filedListMap[listType]" :key="`${i}-${j}`">{{ item[field] }}</td>
             </tr>
           </tbody>
         </x-table>
@@ -37,6 +31,8 @@
 </template>
 
 <script>
+import { getList } from '@/api/debt';
+
 import {
   XTable,
   Icon,
@@ -54,10 +50,35 @@ export default {
         search: '',
       },
       searching: false,
+      headerListMap: {
+        pay: ['时间', '客户', '订单金额', '已付金额'],
+        arrears: ['时间', '客户', '订单金额', '欠款金额'],
+      },
+      filedListMap: {
+        pay: ['orderDate', 'customName', 'relAmnt', 'repAmnt'],
+        arrears: ['orderDate', 'customName', 'relAmnt', 'arrAmnt'],
+      },
+      // 列表类型: pay, arrears
+      listType: 'pay',
+      list: [],
     };
   },
+  created() {
+    const { query: { listType } } = this.$route;
+
+    if (listType) {
+      this.listType = listType;
+    }
+
+    this.getList();
+  },
   methods: {
-    getList() {},
+    getList() {
+      getList(this.listQuery).then((res) => {
+        const { data } = res;
+        this.list = data;
+      });
+    },
     handleSearch() {
       this.searching = true;
       this.$refs.search.focus();
@@ -65,6 +86,7 @@ export default {
     clearSearch() {
       this.listQuery.search = '';
       this.searching = false;
+      this.getList();
     },
   },
 };
