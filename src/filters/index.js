@@ -20,4 +20,12 @@ export function setPayStatus(status) {
   const list = ['撤回', '立即支付', '待投放', '投放中'];
   return list[status];
 }
-
+// 存根状态
+export const cungenStatusMap = {
+  1: '买方自提',
+  2: '卖方代发货',
+  3: '拼包',
+};
+export function deliverStauts(status) {
+  return cungenStatusMap[status];
+}
