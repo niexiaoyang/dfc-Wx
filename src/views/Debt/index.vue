@@ -1,7 +1,7 @@
 <template>
   <div class="debt-page">
     <div class="search-wrapper">
-      <input type="text" v-model="listQuery.search" ref="search" placeholder="请输入关键字" @keyup.enter="getList" />
+      <input type="search" v-model="listQuery.search" ref="search" placeholder="请输入关键字" @keyup.enter="getList" />
       <div class="search-tag flex-center" v-show="!searching" @click="handleSearch">
         <icon type="search"></icon>
         <span class="label">搜索</span>
