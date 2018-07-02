@@ -23,7 +23,8 @@ router.beforeEach((to, from, next) => {
   const { query } = to;
 
   if (query.token) {
-    Cookies.set('token', query.token);
+    console.log(decodeURIComponent(query.token));
+    Cookies.set('token', decodeURIComponent(query.token));
   }
 
   next();
