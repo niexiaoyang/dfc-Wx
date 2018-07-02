@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, i) in list" :key="i">
+            <tr v-for="(item, i) in list" :key="i" @click="handleClickRow(item)">
               <td v-for="(field, j) in filedListMap[listType]" :key="`${i}-${j}`">{{ item[field] }}</td>
             </tr>
           </tbody>
@@ -32,6 +32,8 @@
 
 <script>
 import { getList } from '@/api/debt';
+import brower from '@/utils/brower';
+import bridge from '@/utils/bridge';
 
 import {
   XTable,
@@ -87,6 +89,27 @@ export default {
       this.listQuery.search = '';
       this.searching = false;
       this.getList();
+    },
+    handleClickRow(debt) {
+      const { orderId } = debt;
+
+      const payload = {
+        type: 'debtOrder',
+        data: {
+          id: orderId,
+        },
+      };
+      const str = JSON.stringify(payload);
+
+      if (brower.checkIfIOS()) {
+        bridge.callHandler('callNavigation', payload, (response) => {
+          console.log('JS got response', response);
+        });
+      } else {
+        if (window.jsObj && window.jsObj.callNavigation) {
+          window.jsObj.callNavigation(str);
+        }
+      }
     },
   },
 };
