@@ -1,14 +1,17 @@
 <template>
   <div class="debt-page">
-    <div class="search-wrapper">
-      <input type="search" v-model="listQuery.search" ref="search" placeholder="请输入关键字" @keyup.enter="getList" />
+    <div class="search-wrapper flex-row">
+      <div class="input-wrapper">
+        <input type="text" v-model="listQuery.search" ref="search" placeholder="请输入关键字" @keyup.enter="getList" />
+        <div class="flex-center clear-btn" @click="clearSearch">
+          <icon type="clear" v-show="searching"></icon>
+        </div>
+      </div>
       <div class="search-tag flex-center" v-show="!searching" @click="handleSearch">
         <icon type="search"></icon>
         <span class="label">搜索</span>
       </div>
-      <div class="flex-center clear-btn" @click="clearSearch">
-        <icon type="clear" v-show="searching"></icon>
-      </div>
+      <div class="search-btn" @click="getList" v-show="searching">搜索</div>
     </div>
     <div class="data-wrapper">
       <div class="bg-bar"></div>
@@ -123,17 +126,25 @@ export default {
     .search-wrapper {
       position: relative;
       margin: 0 10px 20px;
-      padding: 4px 16px;
       height: 30px;
-      border-radius: 15px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.04);
+      line-height: 30px;
+
+      .input-wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.04);
+      }
 
       input {
+        padding: 4px 16px;
         height: 100%;
         width: 100%;
         border: none;
         outline: none;
+        border-radius: 15px;
+        background-color: #ffffff;
       }
 
       .search-tag {
@@ -154,10 +165,21 @@ export default {
 
       .clear-btn {
         position: absolute;
-        top: 8px;
+        top: 7px;
         right: 8px;
         width: 16px;
         height: 16px;
+      }
+
+      .search-btn {
+        margin-left: 4px;
+        margin-right: 4px;
+        width: 64px;
+        text-align: center;
+        background-color: #ff4444;
+        color: #ffffff;
+        height: 100%;
+        border-radius: 4px;
       }
     }
 
