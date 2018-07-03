@@ -35,7 +35,7 @@ Object.keys(filters).forEach((key) => {
 });
 
 // vsconsole
-const DEBUG = false;
+const DEBUG = true;
 // false 绿色的按钮消失
 if (DEBUG) {
   const vconsole = new VConsole();
